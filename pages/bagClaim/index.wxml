@@ -1,0 +1,18 @@
+<!--pages/bagClaim/index.wxml-->
+<cu-custom bgColor="bg-user-color" isCustomHome="true" class="custom">
+  <view slot="content">存包</view>
+</cu-custom>
+<view class="bagClaimWrap">
+  <view class="bagClaim">
+    <view wx:if="{{isFlag}}" class="imgWrap">
+      <image class="ellipse" src="../../resource/img/ellipse.png"></image>
+      <image class="door" src="../../resource/img/door.png"></image>
+      <view class="img_text">{{mark}}号</view>
+    </view>
+    <view wx:else class="imgWrap">
+      <image class="ellipse" src="../../resource/img/close-door.png"></image>
+    </view>
+    <view class="bagClaimText">{{isFlag?btnStatus[0].text:btnStatus[1].text}}</view>
+      <view bindtap="toHome" data-num="{{isFlag?btnStatus[0].num:btnStatus[1].num}}" class="btn">{{isFlag?'返回首页':'重新开门'}}</view>
+  </view>
+</view>

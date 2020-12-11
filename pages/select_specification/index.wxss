@@ -1,0 +1,61 @@
+/* pages/select_specification/index.wxss */
+.specificationWrap {
+  width: 100%;
+}
+
+.specification {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 240rpx;
+}
+
+.specification_item {
+  width: 670rpx;
+  height: 240rpx;
+  border-radius: 18rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx 0 40rpx;
+  font-size: 28rpx;
+  margin-bottom: 48rpx;
+  box-shadow: 5px 5px 4px #ddd;
+}
+
+.specification_content {
+  width: 426rpx;
+}
+
+.imgWrap {
+  width: 110rpx;
+}
+
+.imgWrap image {
+  width: 100%;
+}
+
+.specification_name {
+  font-size: 46rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.usable {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #2043FF;
+}
+
+.iconperson-right {
+  font-size: 60rpx;
+  color: #2043FF;
+}
+
+.no_specification_item,
+.no_usable,
+.no_iconperson-right {
+  color: #999;
+}

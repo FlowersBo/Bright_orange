@@ -1,0 +1,161 @@
+{
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "skeleton-config": {
+    "global": {
+      "loading": "spin",
+      "text": {
+        "color": "#EEEEEE"
+      },
+      "image": {
+        "shape": "",
+        "color": "#EFEFEF",
+        "shapeOpposite": []
+      },
+      "button": {
+        "color": "#EFEFEF",
+        "excludes": []
+      },
+      "pseudo": {
+        "color": "#EFEFEF",
+        "shape": "circle",
+        "shapeOpposite": []
+      },
+      "excludes": [],
+      "remove": [
+        ".footer"
+      ],
+      "empty": [],
+      "hide": [],
+      "grayBlock": [
+        ".swiper-item",
+        ".scroll-view-item"
+      ],
+      "cssUnit": "rpx",
+      "decimal": 4,
+      "showNative": false,
+      "backgroundColor": "transparent",
+      "mode": "auto",
+      "templateName": "skeleton"
+    },
+    "pages": {
+      "index/index": {},
+      "pages/buyCard/index": {
+        "showNative": true
+      }
+    }
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": false,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "enableEngineNative": false,
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.10.4",
+  "appid": "wxf3f81a0729754e2f",
+  "projectname": "Bright_orange",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "首页",
+          "pathName": "pages/destination/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 1,
+          "name": "授权页",
+          "pathName": "pages/wxlogin/index",
+          "query": "",
+          "scene": 1011
+        },
+        {
+          "id": 2,
+          "name": "测试",
+          "pathName": "pages/cs/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "开门",
+          "pathName": "pages/wxPay/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "选择规格",
+          "pathName": "pages/select_specification/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "测试",
+          "pathName": "pages/cs/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "开柜门",
+          "pathName": "pages/bagClaim/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "寄存中",
+          "pathName": "pages/fetchBag/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

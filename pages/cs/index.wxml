@@ -1,0 +1,11 @@
+<!--pages/cs/index.wxml-->
+<cu-custom bgColor="bg-user-color" isBack="true" class="custom">
+  <view slot="backText">返回</view>
+  <view slot="content">测试</view>
+</cu-custom>
+<!-- 引入模块 -->
+<import src="../index/index.wxml" />
+
+<block wx:for="{{message}}" wx:key="id">
+  <template is="personCourseItemTmp" data="{{...item}}"></template>
+</block>

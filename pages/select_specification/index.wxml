@@ -1,0 +1,24 @@
+<!--pages/select_specification/index.wxml-->
+<cu-custom bgColor="bg-user-color" isCustom="true" class="custom">
+  <view slot="content">柜门规格</view>
+</cu-custom>
+<scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
+  style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
+  bindtoload="toload">
+  <view class="specificationWrap">
+    <view class="specification">
+      <block wx:for="{{specification}}" wx:key='index'>
+        <view class="specification_item {{item.unUsed?'':'no_specification_item'}}" data-specifications="{{item.specifications}}" data-unUsed="{{item.unUsed}}" bindtap="selectFn">
+          <view class="imgWrap">
+            <image mode="widthFix" src="{{item.unUsed?item.imgs:item.img}}"></image>
+          </view>
+          <view class="specification_content">
+            <view class="specification_name">{{item.name}} <text class="usable {{item.unUsed?'':'no_usable'}}">（可用 {{item.unUsed?item.unUsed:'0'}}）</text> </view>
+            <view class="specification_apply">适用：{{item.apply}}</view>
+          </view>
+          <icon class="iconfont iconperson-right {{item.unUsed?'':'no_iconperson-right'}}"></icon>
+        </view>
+      </block>
+    </view>
+  </view>
+</scroll-y>

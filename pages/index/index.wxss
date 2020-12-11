@@ -1,0 +1,45 @@
+/* pages/index/index.wxss */
+.name {
+  text-align: center;
+}
+
+.widget_arrow {
+  margin-top: 20px;
+  height: 200px;
+  width: 200px;
+  margin-left: 25%;
+}
+
+.info {
+  font-size: 14px;
+  width: 370rpx;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.info span {
+  font-weight: 600;
+}
+
+.info_border {
+  height: 200px;
+  width: 200px;
+  border: 8px solid red;
+}
+
+navigator {
+  margin: 0 auto;
+  height: 40px;
+  width: 90%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: green;
+  line-height: 40px;
+  text-align: center;
+}
+
+.hr {
+  height: 0;
+  width: 100%;
+  border: 1px solid green;
+}

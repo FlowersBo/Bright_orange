@@ -1,0 +1,20 @@
+<!--pages/index/index.wxml-->
+<!-- 使用 name 属性，作为模板的名字 -->
+<template name="personCourseItemTmp">
+    <!-- 显示 -->
+    <view wx:if="{{mentor_image_uri==null}}">
+    <!-- 默认图片地址 -->
+        <image class="widget_arrow" src="../../resource/img/bigbag-s.png" mode="aspectFill"></image>
+    </view>
+    <view wx:else>
+        <image class="widget_arrow" src="{{mentor_image_uri}}" mode="aspectFill"></image>
+    </view>
+  
+    <view class='info'><span>姓名：</span>{{mentor_name}}</view>
+    <view class='info'><span>职位：</span>{{career}}</view>
+    <view class='info'><span>公司：</span>{{company_name}}</view>
+    <view class='info'><span>地区：</span>{{address}}</view>
+    <view class='info'><span>擅长：</span>{{mentor_skills}}</view>
+    <navigator url="../destination/index">详情</navigator>
+    <view class='hr'></view>
+</template>

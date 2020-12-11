@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/destination/index",
+    "pages/wxPay/index",
+    "pages/wxlogin/index",
+    "pages/bagClaim/index",
+    "pages/orderList/index",
+    "pages/nearbyMap/index",
+    "pages/mapNavigation/index",
+    "pages/index/index",
+    "pages/select_specification/index",
+    "pages/cs/index",
+    "pages/fetchBag/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FDE50D",
+    "navigationBarTitleText": "智能充电柜",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
+    "scroll-y": "/component/scroll-y/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

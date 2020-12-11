@@ -1,0 +1,44 @@
+<!--pages/fetchBag/index.wxml-->
+<cu-custom bgColor="bg-user-color" isCustomHome="true" class="custom">
+  <view slot="content">寄存中</view>
+</cu-custom>
+<scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
+  style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
+  bindtoload="toload">
+  <view class="fetchBagWrap">
+    <view class="fetchBag">
+      <view class="real_fetchWrap">
+        <!-- <image class="background_img" src="../../resource/img/timg.jpg"></image> -->
+        <view class="real_fetch">
+          <view class="real_fetch_l">
+          <view>寄存时长：{{real_fetch.depositDuration}}</view>
+          <view>预计费用：￥{{real_fetch.orderPrice}}</view>
+        </view>
+        <view class="real_fetch_r">
+          <icon class="iconfont iconperson-right"></icon>
+        </view>
+        </view>
+      </view>
+      <view class="overBtnWrap">
+        <view class="terminate" hover-class='getNum_hover' hover-stay-time='100' data-index="0" bindtap="terminateFn">
+          <view class="img">
+            <image mode="widthFix" src="../../resource/img/continue.png"></image>
+          </view>
+          <view class="selectText">
+            <view class="selectText_t">中途取包</view>
+            <view class="selectText_b">继续寄存</view>
+          </view>
+        </view>
+        <view class="terminate" hover-class='getNum_hover' hover-stay-time='100' data-index="1" bindtap="terminateFn">
+          <view class="img">
+            <image mode="widthFix" src="../../resource/img/terminate.png"></image>
+          </view>
+          <view class="selectText">
+            <view class="selectText_t">结束寄存</view>
+            <view class="selectText_b">开门并结束</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-y>
