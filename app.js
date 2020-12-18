@@ -66,7 +66,6 @@ App({
 
   onLaunch: function () {
     const that = this;
-    this.autoUpdate();
     wx.getSystemInfo({
       success: e => {
         that.globalData.screenWidth = e.screenWidth;
@@ -83,6 +82,7 @@ App({
         }
       }
     })
+    this.autoUpdate();
   },
 
   // 版本更新

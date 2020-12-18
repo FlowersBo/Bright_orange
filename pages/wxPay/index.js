@@ -21,8 +21,7 @@ Page({
 
   //规则查询
   billingFn: () => {
-    // orderinfo_id = '1310520658144264192';
-    let orderinfo_id = wx.getStorageSync('orderinfo_id');
+    let {orderinfo_id} = wx.getStorageSync('pathPartWrap');
     const data = {
       orderinfo_id
     }
@@ -93,21 +92,21 @@ Page({
     that.setData({
       disabled: true
     })
-    let {customerId,factoryNo,specifications} = wx.getStorageSync('pathPartWrap');
+    let {customerId,factoryNO,specifications,orderinfo_id} = wx.getStorageSync('pathPartWrap');
     const data = {
       openid: wx.getStorageSync('open_id'),
-      orderinfo_id: wx.getStorageSync('orderinfo_id'),
+      orderinfo_id,
       customerId,
-      FactoryNO: factoryNo,
+      FactoryNO: factoryNO,
       specifications
     }
     mClient.wxRequest(api.paymentAuthorization, data)
       .then(res => {
         console.log('下单返回', res);
-        const mark = res.data;
+        const mark = res.data.data;
         if (res) {
           wx.redirectTo({
-            url: '/pages/bagClaim/index?orderinfo_code=' + res.code + '&mark=' + mark
+            url: '/pages/bagClaim/index?orderinfo_code=' + res.data.code + '&mark=' + mark
           })
         }
       })
@@ -208,7 +207,7 @@ Page({
 
   // 授权查询
   startusQueryFn: (userTouch) => {
-    let orderinfo_id = wx.getStorageSync('orderinfo_id');
+    let {orderinfo_id} = wx.getStorageSync('pathPartWrap');
     const data = {
       orderinfo_id,
       openid: wx.getStorageSync('open_id')

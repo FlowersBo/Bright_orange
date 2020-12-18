@@ -144,14 +144,20 @@
           "scene": null
         },
         {
-          "name": "开柜门",
+          "name": "开柜门返回结果",
           "pathName": "pages/bagClaim/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "寄存中",
+          "name": "寄存中取包",
           "pathName": "pages/fetchBag/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "订单详情",
+          "pathName": "pages/orderList/orderDetail/index",
           "query": "",
           "scene": null
         }

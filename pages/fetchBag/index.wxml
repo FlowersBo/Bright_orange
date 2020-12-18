@@ -7,7 +7,7 @@
   bindtoload="toload">
   <view class="fetchBagWrap">
     <view class="fetchBag">
-      <view class="real_fetchWrap">
+      <view class="real_fetchWrap" bindtap="gotoOrderDetail">
         <!-- <image class="background_img" src="../../resource/img/timg.jpg"></image> -->
         <view class="real_fetch">
           <view class="real_fetch_l">

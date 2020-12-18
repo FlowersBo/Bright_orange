@@ -1,0 +1,50 @@
+<!--pages/orderList/orderDetail/index.wxml-->
+<cu-custom bgColor="bg-user-color" isCustom="true" class="custom">
+  <view slot="content">订单详情</view>
+</cu-custom>
+<scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
+  style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
+  bindtoload="toload">
+  <view class="orderDetailWrap">
+    <view class="orderDetail">
+      <view class="order_state">
+        <view class="state">{{real_fetch.orderStatus}}</view>
+        <view class="duration">寄存{{real_fetch.depositDuration}}</view>
+      </view>
+
+      <view class="consignDetails">
+        <view class="cu-bar bg-white">
+          <view class="action">
+            <text class="cuIcon-titles text-green"></text>
+            <text class="text-xl text-bold">寄存详情</text>
+          </view>
+        </view>
+        <view class="order_item">订单编号：{{real_fetch.orderNo}}</view>
+        <view class="order_item">寄存地点：{{real_fetch.pointAddress}}</view>
+        <view class="order_item">起始时间：{{real_fetch.startDate}}</view>
+        <view class="order_item">结束时间：{{real_fetch.finishDate?real_fetch.finishDate:''}}</view>
+      </view>
+      <view class="order_price">
+        <view class="cu-bar bg-white">
+          <view class="action">
+            <text class="cuIcon-titles text-green"></text>
+            <text class="text-xl text-bold">费用明细</text>
+          </view>
+        </view>
+        <view class="money">应付总额：￥{{real_fetch.orderPrice}}</view>
+      </view>
+      <view class="patternOfpayment">
+        <view class="cu-bar bg-white">
+          <view class="action">
+            <text class="cuIcon-titles text-green"></text>
+            <text class="text-xl text-bold">支付方式</text>
+          </view>
+        </view>
+        <view class="wxmoney">
+          <icon class="iconfont iconweixinzhifu"></icon>
+          <text>微信支付</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-y>

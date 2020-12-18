@@ -1,0 +1,51 @@
+/* pages/orderList/orderDetail/index.wxss */
+page{
+  background-color: #fff;
+}
+.orderDetailWrap{
+  padding: 0 20rpx;
+}
+.orderDetail{
+  font-size: 32rpx;
+}
+.order_state{
+  height: 80rpx;
+  padding: 0 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+
+.state{
+  color: #09BB07;
+}
+.cu-bar .action:first-child{
+  margin-left: 0;
+}
+.consignDetails{
+  height: 360rpx;
+  line-height: 60rpx;
+  border-bottom: 1px solid #ddd;
+  padding: 0 20rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+}
+.order_price{
+  height: 160rpx;
+  padding: 0 20rpx;
+  border-bottom: 1px solid #ddd;
+}
+
+
+.patternOfpayment{
+  padding: 0 20rpx;
+}
+
+.iconweixinzhifu{
+  font-size: 40rpx;
+  margin-right: 10rpx;
+  color: #09BB07;
+}

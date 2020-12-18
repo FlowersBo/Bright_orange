@@ -1,9 +1,11 @@
 // const ApiRootUrl = 'https://api.morninggo.cn/';
-// const ApiRootUrl = 'https://w3.morninggo.cn/'; //晨购
-const ApiRootUrl = 'http://192.168.126.247:8080/morninggo_app_http_war/';
+const ApiRootUrl = 'https://w3.morninggo.cn/'; //晨购
+// const ApiRootUrl = 'http://192.168.126.247:8080/morninggo_app_http_war/';
 // const ApiRootUrl = 'http://192.168.31.148:8080/morninggo_app_http_war_exploded/';
 module.exports = {
     Login: ApiRootUrl + 'applets/checkUserByOpenid', //登录授权code
+
+    checkOrder: ApiRootUrl + 'applets/checkOrder', //查询有无订单
 
     specificationsInfo: ApiRootUrl + 'applets/specificationsInfo', //规格
 
@@ -17,6 +19,12 @@ module.exports = {
 
     OrderList: ApiRootUrl + 'applets/queryOrderList', //订单列表
     OrderDetail: ApiRootUrl + 'applets/queryOrderById', //订单详情
+
+    openDoor: ApiRootUrl + 'applets/openDoor', //开门取包
+
+    
+
+
 
 
 

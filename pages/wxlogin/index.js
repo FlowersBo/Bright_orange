@@ -17,26 +17,27 @@ Page({
   onLoad: function (options) {
     that = this;
     wx.hideShareMenu();
-    let open_id = wx.getStorageSync('open_id');
-    if (!open_id) {
-      that.wxLogin();
-    }
+    // let open_id = wx.getStorageSync('open_id');
+    // if (!open_id) {
+    that.wxLogin();
+    // }
     console.log('跳转拿到参数', options);
-    let pagepath = options.pagepath;
-    console.log(pagepath)
-    if (pagepath) {
-      let path = decodeURIComponent(pagepath);
-      let pathPartWrap = {};
-      const pathPart = path.split('?')[1].split('&');
-      console.log('分解', pathPart);
-      for (const key in pathPart) {
-        let pathPart_item = pathPart[key].split('=');
-        console.log(pathPart_item);
-        for (const item in pathPart_item) {
-          pathPart_item[item] = pathPart_item[item].replace(/\"/g, "");
-          pathPartWrap[pathPart_item[0]] = pathPart_item[1];
-        }
-      }
+    let pathPartWrap = options;
+    console.log('缓存', wx.getStorageSync('pathPartWrap'));
+    console.log(Object.values(pathPartWrap).length > 0);
+    if (Object.values(pathPartWrap).length > 0) {
+      // let path = decodeURIComponent(pagepath);
+      // let pathPartWrap = {};
+      // const pathPart = path.split('?')[1].split('&');
+      // console.log('分解', pathPart);
+      // for (const key in pathPart) {
+      //   let pathPart_item = pathPart[key].split('=');
+      //   console.log(pathPart_item);
+      //   for (const item in pathPart_item) {
+      //     pathPart_item[item] = pathPart_item[item].replace(/\"/g, "");
+      //     pathPartWrap[pathPart_item[0]] = pathPart_item[1];
+      //   }
+      // }
       console.log(pathPartWrap);
       wx.setStorageSync('pathPartWrap', pathPartWrap);
     }
@@ -97,7 +98,12 @@ Page({
 
   // 授权
   getPhoneNumber: (e) => {
-    let {customerId, factoryNo, specifications,gzh_openid} = wx.getStorageSync('pathPartWrap');
+    let {
+      customerId,
+      factoryNO,
+      specifications,
+      gzh_openid
+    } = wx.getStorageSync('pathPartWrap');
     var iv = e.detail.iv;
     var encryptedData = e.detail.encryptedData;
     // encryptedData = encodeURIComponent(encryptedData);
@@ -116,7 +122,7 @@ Page({
                 iv: iv,
                 sessionKey: wx.getStorageSync('sessionKey'),
                 openid: wx.getStorageSync('open_id'),
-                FactoryNO: factoryNo,
+                FactoryNO: factoryNO,
                 customer_id: customerId,
                 specifications,
                 gzh_openid
@@ -127,7 +133,9 @@ Page({
                   console.log("授权返回参数", res);
                   if (res.data.code == "0") {
                     let orderinfo_id = res.data.data.orderinfo_id;
-                    wx.setStorageSync('orderinfo_id', orderinfo_id);
+                    let pathPartWrap = wx.getStorageSync('pathPartWrap');
+                    pathPartWrap.orderinfo_id = orderinfo_id;
+                    wx.setStorageSync('pathPartWrap', pathPartWrap);
                     // 跳转开门
                     wx.redirectTo({
                       url: '/pages/wxPay/index',

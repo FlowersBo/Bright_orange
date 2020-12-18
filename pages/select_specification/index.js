@@ -54,25 +54,27 @@ Page({
     //   console.log(pathPart);
     //   wx.setStorageSync('pathPart', pathPart);
     // }
-    // let result = 'pages/wxlogin/index?gzh_openid=oTczw5kyRvndorvri7jcG0o2v2fg&factoryNO=cw100086002';
-    // let result = 'pages/wxlogin/index?customerId=1318470984176500736&factoryNo=cw100086003&specifications=specifications&gzh_openid=oTczw5kyRvndorvri7jcG0o2v2fg';
+    // let pagepath = 'pages/wxlogin/index?customerId=1338687455984877568&factoryNo=cw100086003&gzh_openid=oTczw5kyRvndorvri7jcG0o2v2fg';
+    // options = {
+    //   customerId: '1338687455984877568',
+    //   factoryNO: 'cw100086003',
+    //   gzh_openid: 'oTczw5kSxCwWz4FW4FaT2OKIpz4M'
+    // }
     console.log('跳转拿到参数', options);
-    let pagepath = options.pagepath;
-    console.log(pagepath)
-    if (pagepath) {
-      let path = decodeURIComponent(pagepath);
-      let pathPartWrap = {};
-      const pathPart = path.split('?')[1].split('&');
-      console.log('分解', pathPart);
-      for (const key in pathPart) {
-        let pathPart_item = pathPart[key].split('=');
-        console.log(pathPart_item);
-        for (const item in pathPart_item) {
-          pathPart_item[item] = pathPart_item[item].replace(/\"/g, "");
-          pathPartWrap[pathPart_item[0]] = pathPart_item[1];
-        }
-      }
-      console.log(pathPartWrap);
+    let pathPartWrap = options;
+    console.log(Object.values(pathPartWrap).length > 0);
+    if (Object.values(pathPartWrap).length > 0) {
+      // let pathPartWrap = decodeURIComponent(pagepath);
+      // const pathPart = path.split('?')[1].split('&');
+      // console.log('分解', pathPart);
+      // for (const key in pathPart) {
+      //   let pathPart_item = pathPart[key].split('=');
+      //   console.log(pathPart_item);
+      //   for (const item in pathPart_item) {
+      //     pathPart_item[item] = pathPart_item[item].replace(/\"/g, "");
+      //     pathPartWrap[pathPart_item[0]] = pathPart_item[1];
+      //   }
+      // }
       wx.setStorageSync('pathPartWrap', pathPartWrap);
       // pathPart_item.parseJSON();
       // let gzh_openid = pathPart[1];
@@ -80,12 +82,39 @@ Page({
       // console.log(gzh_openid, factoryNO);
       // wx.setStorageSync('factoryNo', factoryNO);
     }
-    let open_id = wx.getStorageSync('open_id');
-    if (!open_id) {
-      that.wxLogin();
-    } else {
-      that.usableFn();
-    }
+    // let open_id = wx.getStorageSync('open_id');
+    that.orderInquire();
+    // if (!open_id) {
+    that.wxLogin();
+    // } else {
+    //   that.usableFn();
+    // }
+  },
+
+  orderInquire: () => {
+    let {
+      customerId
+    } = wx.getStorageSync('pathPartWrap');
+    let data = {
+      customerId
+    };
+    mClient.wxGetRequest(api.checkOrder, data)
+      .then(res => {
+        console.log("是否有订单", res);
+        if (res.data.code == "0") {
+          let customerId = res.data.data.customerId,
+            factoryNO = res.data.data.factoryNO,
+            orderinfo_id = res.data.data.orderinfo_id;
+          wx.redirectTo({
+            url: '/pages/fetchBag/index?customerId=' + customerId + '&factoryNO=' + factoryNO + '&orderinfo_id=' + orderinfo_id
+          })
+        } else {
+
+        }
+      })
+      .catch(rej => {
+
+      })
   },
 
   // 登录
@@ -130,10 +159,10 @@ Page({
   //查询可用
   usableFn: () => {
     let {
-      factoryNo
+      factoryNO
     } = wx.getStorageSync('pathPartWrap');
     let data = {
-      factoryNo
+      factoryNo: factoryNO
     };
     mClient.wxGetRequest(api.specificationsInfo, data)
       .then(res => {

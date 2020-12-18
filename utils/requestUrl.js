@@ -45,13 +45,61 @@ const wxRequest = (url, data = {}, method = 'POST') => {
       },
       complete: (res) => {
         ajaxTimes--;
-        if (ajaxTimes === 0) {
+        if (ajaxTimes <= 0) {
           wx.hideLoading()
         }
       }
     })
   })
 }
+
+const wxPostRequestUrl = (url, data = {}, method = 'POST') => {
+  let param = objectToJsonParams(data);
+  console.log(url + param);
+  let open_id = wx.getStorageSync('open_id');
+  return new Promise(function (resolve, reject) {
+    wx.request({
+      url: url + param,
+      method: method,
+      header: {
+        'charset': 'utf-8',
+        'Content-Type': 'application/json',
+        'app-access-token': open_id
+      },
+      success: function (resp) {
+        console.log(resp);
+        if (resp.statusCode === 200) {
+          resolve(resp);
+        } else {
+          reject(resp.errMsg);
+        }
+        if (!resp.data.message) {
+          wx.showToast({
+            title: '服务器错误，请稍后重试',
+            icon: 'none',
+            duration: 1000
+          });
+        }
+      },
+      fail: function (err) {
+        reject(err)
+        console.log("failed");
+        wx.showToast({
+          title: '请求超时',
+          icon: 'none',
+          duration: 2000
+        });
+      },
+      complete: (res) => {
+        ajaxTimes--;
+        if (ajaxTimes === 0) {
+          wx.hideLoading()
+        }
+      }
+    })
+  });
+}
+
 const wxGetRequest = (url, data = {}, method = 'GET') => {
   let param = objectToJsonParams(data);
   console.log(url + param);
@@ -131,5 +179,6 @@ function objectToJsonParams(data = {}) {
 module.exports = {
   wxRequest,
   wxGetRequest,
+  wxPostRequestUrl,
   login
 }

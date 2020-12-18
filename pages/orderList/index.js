@@ -32,14 +32,13 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    let current = '1';
-    let open_id = wx.getStorageSync('open_id');
-
-    if (open_id) {
-      that.orderListFn(current);
-    } else {
-      that.wxLogin();
-    }
+    // let current = '1';
+    // let open_id = wx.getStorageSync('open_id');
+    // if (open_id) {
+    //   that.orderListFn(current);
+    // } else {
+    that.wxLogin();
+    // }
     const query = wx.createSelectorQuery().in(this)
     query.selectAll('.custom').boundingClientRect(function (res) {
       const customHeight = res[0].height;
@@ -64,7 +63,7 @@ Page({
               if (resp.data.code == "0") {
                 wx.setStorageSync('open_id', resp.data.data.openid);
                 // wx.setStorageSync('sessionKey', resp.data.data.sessionKey);
-                that.orderListFn();
+                that.orderListFn('1');
                 //用户已点击;授权
               } else {
                 wx.showToast({
@@ -158,7 +157,6 @@ Page({
       })
   },
 
-
   // 刷新
   refresh() {
     let current = '1';
@@ -208,7 +206,7 @@ Page({
           'push.loading': '../../resource/img/finish.png',
         })
       }, 1500)
-    } else if(that.data.orderList.length){
+    } else if (that.data.orderList.length) {
       that.setData({
         // 'push.isLoading': false,
         'push.pullText': '- 我也是有底线的 -'
@@ -233,6 +231,9 @@ Page({
   clickOrder: (e) => {
     console.log(e);
     const orderId = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: 'orderDetail/index?id=' + orderId,
+    })
   },
 
   /**

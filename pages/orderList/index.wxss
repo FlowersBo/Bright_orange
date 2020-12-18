@@ -12,7 +12,7 @@ page {
 }
 
 .orderList {
-  width: 680rpx;
+  width: 710rpx;
   height: 400rpx;
   border-radius: 10rpx;
   background-color: #fff;

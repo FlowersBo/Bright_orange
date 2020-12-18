@@ -9,6 +9,7 @@ Page({
    */
   data: {
     isFlag: false,
+    isShow: true,
     btnStatus: [{
         'num': 0,
         'text': '柜门打开成功，请随手关门'
@@ -19,18 +20,53 @@ Page({
       }
     ]
   },
-  toHome(e) {
 
+  toHome(e) {
     console.log(e);
     let num = e.currentTarget.dataset.num;
+    let {
+      orderinfo_id
+    } = wx.getStorageSync('pathPartWrap')
     if (num === 0) {
       wx.reLaunch({
         url: '/pages/destination/index',
       })
-    } else { //重新开门
-
+    } else if (wx.getStorageSync('operate') && num != 0) { //重新开门
+      let data = {
+        operate: wx.getStorageSync('operate'),
+        orderId: orderinfo_id
+      };
+      mClient.wxRequest(api.openDoor, data)
+        .then(res => {
+          console.log("开门返回", res);
+          const mark = res.data.data;
+          // if (res.data.code == "0") {
+          let orderinfo_code = res.data.code;
+          that.doorFn(orderinfo_code, mark);
+          // } else {
+          //   wx.showToast({
+          //     title: res.data.message,
+          //     icon: 'none',
+          //     duration: 2000
+          //   })
+          //   wx.hideLoading();
+          // }
+        })
+        .catch(rej => {
+          console.log(rej)
+          wx.showToast({
+            title: rej.error,
+            icon: 'none',
+            duration: 2000
+          })
+        })
+    } else {
+      wx.reLaunch({
+        url: '/pages/destination/index',
+      })
     }
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -42,23 +78,31 @@ Page({
       that.doorFn(orderinfo_code, mark);
     }
   },
+
   doorFn: (orderinfo_code, mark) => {
+    const innerAudioContext = wx.createInnerAudioContext();
+    innerAudioContext.autoplay = true; //音频自动播放
     if (orderinfo_code == '0') {
-      const innerAudioContext = wx.createInnerAudioContext();
-      innerAudioContext.autoplay = true; //音频自动播放设置
-      innerAudioContext.src = '/resource/audio/audio.mp3'; //链接到音频的地址
+      innerAudioContext.src = '/resource/audio/audio.mp3';
       innerAudioContext.onPlay(() => {
         console.log('播放')
-      }); //播放音效
+      });
       innerAudioContext.onError((res) => { //打印错误
-        console.log(res.errMsg); //错误信息
+        console.log(res.errMsg);
         console.log(res.errCode); //错误码
       })
       that.setData({
         isFlag: true,
+        isShow: true,
         mark: mark
       })
     } else {
+      innerAudioContext.src = '/resource/audio/audio1.mp3';
+      if (wx.getStorageSync('operate')) {
+        that.setData({
+          isShow: false
+        })
+      }
       that.setData({
         isFlag: false
       })

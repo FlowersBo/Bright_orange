@@ -11,11 +11,11 @@ page {
 }
 
 .nearbyList {
-  width: 680rpx;
+  width: 710rpx;
   height: 194rpx;
   display: flex;
   justify-content: space-between;
-  padding: 34rpx 30rpx;
+  padding: 34rpx 10rpx 34rpx 30rpx;
   margin-top: 20rpx;
   /* border: 1rpx solid #ddd; */
   border-radius: 10rpx;
@@ -23,8 +23,8 @@ page {
 }
 
 .nearbyLogo {
-  width: 126rpx;
-  height: 126rpx;
+  width: 136rpx;
+  height: 136rpx;
   margin-right: 18rpx;
 }
 
@@ -39,7 +39,14 @@ page {
   min-width: 0;
 }
 
+.nearby_stationWrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .nearby_station {
+  width: 70%;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -49,7 +56,9 @@ page {
   font-family: Hiragino Sans GB;
   font-weight: bold;
 }
-
+.distance{
+  font-size: 28rpx;
+}
 .nearby_address {
   overflow: hidden;
   text-overflow: ellipsis;

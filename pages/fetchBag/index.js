@@ -25,32 +25,70 @@ Page({
     }).exec()
     wx.hideShareMenu();
     console.log('跳转拿到参数', options);
-    let pagepath = options.pagepath;
-    console.log(pagepath)
-    if (pagepath) {
-      let path = decodeURIComponent(pagepath);
-      console.log('解码', path);
-      let pathPartWrap = {};
-      const pathPart = path.split('?')[1].split('&');
-      console.log('分解', pathPart);
-      for (const key in pathPart) {
-        let pathPart_item = pathPart[key].split('=');
-        console.log(pathPart_item);
-        for (const item in pathPart_item) {
-          pathPart_item[item] = pathPart_item[item].replace(/\"/g, "");
-          pathPartWrap[pathPart_item[0]] = pathPart_item[1];
-        }
-      }
+    let pathPartWrap = options;
+    // pagepath = 'pages/wxlogin/index?customerId=1338687455984877568&factoryNo=cw100086003&gzh_openid=oTczw5kyRvndorvri7jcG0o2v2fg';
+    console.log(Object.values(pathPartWrap).length > 0);
+    if (Object.values(pathPartWrap).length > 0) {
+      // let path = decodeURIComponent(pagepath);
+      // console.log('解码', path);
+      // let pathPartWrap = {};
+      // const pathPart = path.split('?')[1].split('&');
+      // console.log('分解', pathPart);
+      // for (const key in pathPart) {
+      //   let pathPart_item = pathPart[key].split('=');
+      //   console.log(pathPart_item);
+      //   for (const item in pathPart_item) {
+      //     pathPart_item[item] = pathPart_item[item].replace(/\"/g, "");
+      //     pathPartWrap[pathPart_item[0]] = pathPart_item[1];
+      //   }
+      // }
       console.log(pathPartWrap);
       wx.setStorageSync('pathPartWrap', pathPartWrap);
     }
-    let open_id = wx.getStorageSync('open_id');
-    if (!open_id) {
-      that.wxLogin();
-    } else {
-      that.orderDetailFn();
-    }
+    // let open_id = wx.getStorageSync('open_id');
+    that.orderInquire();
+    // if (!open_id) {
+    that.wxLogin();
+    // } else {
+    //   that.orderDetailFn();
+    // }
   },
+
+  orderInquire: () => {
+    let {
+      customerId
+    } = wx.getStorageSync('pathPartWrap');
+    let data = {
+      customerId
+    };
+    mClient.wxGetRequest(api.checkOrder, data)
+      .then(res => {
+        console.log("是否有订单", res);
+        if (res.data.code == "0") {
+
+        } else {
+          wx.showModal({
+            showCancel: false,
+            title: '提示',
+            content: '您暂无订单，请存包后再来吧',
+            confirmText: '返回首页',
+            success(res) {
+              if (res.confirm) {
+                wx.reLaunch({
+                  url: '/pages/destination/index',
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        }
+      })
+      .catch(rej => {
+
+      })
+  },
+
   // 登录
   wxLogin: () => {
     mClient.login()
@@ -92,9 +130,12 @@ Page({
 
   //查询计费
   orderDetailFn: () => {
+    let {
+      orderinfo_id
+    } = wx.getStorageSync('pathPartWrap');
     let data = {
-      // id: wx.getStorageSync('orderinfo_id')
-      id: '1328889292776275968'
+      id: orderinfo_id
+      // id: '1338689167609036800'
     };
     let real_fetch = {};
     mClient.wxGetRequest(api.OrderDetail, data)
@@ -128,14 +169,14 @@ Page({
   terminateFn: (ev) => {
     let index = ev.currentTarget.dataset.index;
     let text = '';
-    if(index==='0'){
+    if (index === '0') {
       text = '中途取包'
-    }else{
+    } else {
       text = '结束寄存'
     }
     wx.showModal({
       title: '提示',
-      content: '确定要'+text+'吗？',
+      content: '您确定要' + text + '吗？',
       success(res) {
         if (res.confirm) {
           that.fetchBagFn(index);
@@ -147,29 +188,40 @@ Page({
   },
 
   fetchBagFn: (index) => {
+    console.log(index);
+    let operate,
+      operateTime = (new Date).valueOf();
+    console.log(operateTime)
+    let {
+      orderinfo_id
+    } = wx.getStorageSync('pathPartWrap');
     if (index === '0') {
-      console.log(index);
+      operate = 2;
     } else {
-      wx.reLaunch({
-        url: '../bagClaim/index',
-      })
+      operate = 4;
     }
+    wx.setStorageSync('operate', operate);
     let data = {
-
+      operate,
+      orderId: orderinfo_id
+      // orderId: '1338689167609036800'
     };
-    mClient.wxGetRequest(api.OrderDetail, data)
+    mClient.wxPostRequestUrl(api.openDoor, data)
       .then(res => {
-        console.log("开门返回", res);
-        if (res.data.code == "0") {
-
-        } else {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'none',
-            duration: 1000
-          })
-          wx.hideLoading();
-        }
+        console.log("寄存开门返回", res);
+        const mark = res.data.data;
+        // if (res.data.code == "0") {
+        wx.redirectTo({
+          url: '/pages/bagClaim/index?orderinfo_code=' + res.data.code + '&mark=' + mark
+        })
+        // } else {
+        //   wx.showToast({
+        //     title: res.data.message,
+        //     icon: 'none',
+        //     duration: 2000
+        //   })
+        //   wx.hideLoading();
+        // }
       })
       .catch(rej => {
         console.log(rej)
@@ -179,6 +231,15 @@ Page({
           duration: 2000
         })
       })
+  },
+
+  gotoOrderDetail: () => {
+    let {
+      orderinfo_id
+    } = wx.getStorageSync('pathPartWrap');
+    wx.navigateTo({
+      url: '../orderList/orderDetail/index?id=' + orderinfo_id,
+    })
   },
 
   refresh() {
