@@ -12,7 +12,7 @@
 }
 
 .specification_item {
-  width: 670rpx;
+  width: 690rpx;
   height: 240rpx;
   border-radius: 18rpx;
   background: #fff;

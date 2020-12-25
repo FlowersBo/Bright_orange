@@ -46,7 +46,7 @@ Page({
       wx.setStorageSync('pathPartWrap', pathPartWrap);
     }
     // let open_id = wx.getStorageSync('open_id');
-    that.orderInquire();
+    // that.orderInquire();
     // if (!open_id) {
     that.wxLogin();
     // } else {
@@ -142,11 +142,18 @@ Page({
       .then(res => {
         console.log("寄存返回", res);
         if (res.data.code == "0") {
-          real_fetch.orderPrice = res.data.data.orderPrice;
-          real_fetch.depositDuration = res.data.data.depositDuration;
-          that.setData({
-            real_fetch: real_fetch
-          })
+          let orderStatus = res.data.data.orderStatus;
+          if(orderStatus==='2'){
+            wx.redirectTo({
+              url: '/pages/orderList/orderDetail/index?id=' + orderinfo_id,
+            })
+          }else{
+            real_fetch.orderPrice = res.data.data.orderPrice;
+            real_fetch.depositDuration = res.data.data.depositDuration;
+            that.setData({
+              real_fetch: real_fetch
+            })
+          }
         } else {
           wx.showToast({
             title: res.data.message,

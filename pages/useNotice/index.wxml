@@ -1,0 +1,4 @@
+<!--pages/useNotice/index.wxml-->
+<cu-custom bgColor="bg-user-color" isCustomHome="true">
+  <view slot="content">使用须知</view>
+</cu-custom>

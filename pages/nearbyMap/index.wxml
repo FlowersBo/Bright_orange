@@ -1,4 +1,6 @@
 <!--pages/nearbyMap/index.wxml-->
+<import src="index.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}"/>
 <cu-custom bgColor="bg-user-color" isBack="true" class="custom">
   <view slot="backText">返回</view>
   <view slot="content">附近存包柜</view>
@@ -15,7 +17,7 @@
         <view class="nearbyContent">
           <view class="nearby_stationWrap">
             <view class="nearby_station">{{item.pointname}}</view>
-            <!-- <view class="distance">{{item.distance}}米</view> -->
+            <view class="distance">距离{{item.distance}}米</view>
           </view>
           <view class="nearby_address">具体位置：{{item.address}}</view>
         </view>

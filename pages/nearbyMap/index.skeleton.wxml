@@ -1,0 +1,131 @@
+<!--
+此文件为开发者工具生成，生成时间: 2020/12/25 下午1:57:44 
+使用方法：
+在 C:\Users\Flowers博爵\Desktop\Bright_orange\pages\nearbyMap\index.wxml 引入模板
+
+```
+<import src="index.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 C:\Users\Flowers博爵\Desktop\Bright_orange\pages\nearbyMap\index.wxss 中引入样式
+```
+@import "./index.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view is="colorui/components/cu-custom" class="custom">
+      <view class="cu-custom custom--cu-custom" style="height:88px">
+        <view class="cu-bar custom--cu-bar fixed custom--fixed bg-user-color custom--bg-user-color" style="height:88px;padding-top:44px;">
+          <view class="action custom--action">
+            <text class="cuIcon-back custom--cuIcon-back sk-pseudo sk-pseudo-circle"></text>
+            <view class="sk-transparent sk-text-14-2857-42 sk-text">返回</view>
+          </view>
+          <view class="content custom--content" style="top:44px">
+            <view class="sk-transparent sk-text-23-3333-446 sk-text" style="background-position-x: 50%;">附近存包柜</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view is="component/scroll-y/index" class="scroll-view" style="position: absolute;top: 88px;bottom: 0;width: 100%;flex: 1;">
+      <scroll-view class="y-index--message y-index--scroll-view y-index--client-pool-list" lower-threshold="1" scroll-y="true">
+        <view class="y-index--pull-refresh y-index--jin">
+          <image class="y-index--icon-refresh y-index--z-index-1 sk-image"></image>
+          <view class="y-index--fs24 y-index--pt20 y-index--f-color-666 y-index--z-index-1 sk-transparent sk-text-14-2857-139 sk-text">正在刷新</view>
+        </view>
+        <view class="nearbyListWrap">
+          <view class="nearbyList" data-id="25">
+            <view class="nearbyLogo">
+              <image class="sk-image"></image>
+            </view>
+            <view class="nearbyContent">
+              <view class="nearby_stationWrap">
+                <view class="nearby_station sk-transparent sk-text-14-2857-46 sk-text">昆泰国际测试</view>
+                <view class="distance sk-transparent sk-text-14-2857-315 sk-text">距离92.0米</view>
+              </view>
+              <view class="nearby_address sk-transparent sk-text-9-3750-257 sk-text">具体位置：小昆泰</view>
+            </view>
+          </view>
+          <view class="nearbyList" data-id="26">
+            <view class="nearbyLogo">
+              <image class="sk-image"></image>
+            </view>
+            <view class="nearbyContent">
+              <view class="nearby_stationWrap">
+                <view class="nearby_station sk-transparent sk-text-14-2857-473 sk-text">昆泰国际</view>
+                <view class="distance sk-transparent sk-text-14-2857-905 sk-text">距离235.0米</view>
+              </view>
+              <view class="nearby_address sk-transparent sk-text-9-3750-715 sk-text">具体位置：大昆泰</view>
+            </view>
+          </view>
+          <view class="nearbyList" data-id="1304602121416474624">
+            <view class="nearbyLogo">
+              <image class="sk-image"></image>
+            </view>
+            <view class="nearbyContent">
+              <view class="nearby_stationWrap">
+                <view class="nearby_station sk-transparent sk-text-14-2857-550 sk-text">悠唐购物中心ss</view>
+                <view class="distance sk-transparent sk-text-14-2857-647 sk-text">距离326.0米</view>
+              </view>
+              <view class="nearby_address sk-transparent sk-text-9-3750-736 sk-text">具体位置：有糖国际中心</view>
+            </view>
+          </view>
+          <view class="nearbyList" data-id="1304602121416474626">
+            <view class="nearbyLogo">
+              <image class="sk-image"></image>
+            </view>
+            <view class="nearbyContent">
+              <view class="nearby_stationWrap">
+                <view class="nearby_station sk-transparent sk-text-14-2857-743 sk-text">昆泰国际811-小贾专用</view>
+                <view class="distance sk-transparent sk-text-14-2857-476 sk-text">距离326.0米</view>
+              </view>
+              <view class="nearby_address sk-transparent sk-text-9-3750-333 sk-text">具体位置：昆泰国际812昆泰国际812</view>
+            </view>
+          </view>
+          <view class="nearbyList" data-id="1304602121416474625">
+            <view class="nearbyLogo">
+              <image class="sk-image"></image>
+            </view>
+            <view class="nearbyContent">
+              <view class="nearby_stationWrap">
+                <view class="nearby_station sk-transparent sk-text-14-2857-946 sk-text">昆泰国际811ss</view>
+                <view class="distance sk-transparent sk-text-14-2857-217 sk-text">距离326.0米</view>
+              </view>
+              <view class="nearby_address sk-transparent sk-text-9-3750-728 sk-text">具体位置：昆泰国际811昆泰国际811</view>
+            </view>
+          </view>
+          <view class="nearbyList" data-id="1331882322366038016">
+            <view class="nearbyLogo">
+              <image class="sk-image"></image>
+            </view>
+            <view class="nearbyContent">
+              <view class="nearby_stationWrap">
+                <view class="nearby_station sk-transparent sk-text-14-2857-816 sk-text">烤肠机测试002</view>
+                <view class="distance sk-transparent sk-text-14-2857-422 sk-text">距离2031.0米</view>
+              </view>
+              <view class="nearby_address sk-transparent sk-text-9-3750-957 sk-text">具体位置：东城区</view>
+            </view>
+          </view>
+          <view class="nearbyList" data-id="29">
+            <view class="nearbyLogo">
+              <image class="sk-image"></image>
+            </view>
+            <view class="nearbyContent">
+              <view class="nearby_stationWrap">
+                <view class="nearby_station sk-transparent sk-text-14-2857-625 sk-text">天安门广场</view>
+                <view class="distance sk-transparent sk-text-14-2857-113 sk-text">距离3628.0米</view>
+              </view>
+              <view class="nearby_address sk-transparent sk-text-9-3750-584 sk-text">具体位置：天安门</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="sk-loading-spinner">
+      <view class="circular"></view>
+    </view>
+  </view>
+</template>

@@ -1,4 +1,5 @@
 /* pages/nearbyMap/index.wxss */
+@import "index.skeleton.wxss";
 page {
   height: 100%;
 }
@@ -19,6 +20,7 @@ page {
   margin-top: 20rpx;
   /* border: 1rpx solid #ddd; */
   border-radius: 10rpx;
+  box-shadow: 3px 3px 5px #ddd;
   background-color: #fff;
 }
 
@@ -46,7 +48,7 @@ page {
 }
 
 .nearby_station {
-  width: 70%;
+  width: 60%;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;

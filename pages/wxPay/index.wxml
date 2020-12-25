@@ -10,7 +10,7 @@
       <view class="ruleWrap">
         <view class="meatch">
           <view class="meatchName">{{billing.standardName}}</view>
-          <view class="orderNumber">订单编号:{{billing.id}}</view>
+          <view class="orderNumber">订单编号：{{orderinfo_id}}</view>
         </view>
         <view class="rule">
           <view class="time">

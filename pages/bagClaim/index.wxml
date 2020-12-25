@@ -1,6 +1,6 @@
 <!--pages/bagClaim/index.wxml-->
 <cu-custom bgColor="bg-user-color" isCustomHome="true" class="custom">
-  <view slot="content">存包</view>
+  <view slot="content">存取包</view>
 </cu-custom>
 <view class="bagClaimWrap">
   <view class="bagClaim">

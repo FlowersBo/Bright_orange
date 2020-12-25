@@ -3,7 +3,11 @@ const ApiRootUrl = 'https://w3.morninggo.cn/'; //晨购
 // const ApiRootUrl = 'http://192.168.126.247:8080/morninggo_app_http_war/';
 // const ApiRootUrl = 'http://192.168.31.148:8080/morninggo_app_http_war_exploded/';
 module.exports = {
+    shortUrlDistinguish: ApiRootUrl + 'applets/shortUrlDistinguish', //扫码传参
+
     Login: ApiRootUrl + 'applets/checkUserByOpenid', //登录授权code
+
+    creatOrder: ApiRootUrl + 'applets/creatOrder', //创建订单
 
     checkOrder: ApiRootUrl + 'applets/checkOrder', //查询有无订单
 
@@ -13,8 +17,9 @@ module.exports = {
 
     chargingRules: ApiRootUrl + 'applets/chargingRules', //计费规则
     paymentAuthorization: ApiRootUrl + 'applets/paymentAuthorization', //授权免密支付
+    getUserPermissionsState: ApiRootUrl + 'applets/getUserPermissionsState', //查询状态
     permissionsToken: ApiRootUrl + 'applets/getApplyPermissionsToken', //拉起微信支付分
-
+   
     Location: ApiRootUrl + 'applets/queryNearbyPoints', //位置信息
 
     OrderList: ApiRootUrl + 'applets/queryOrderList', //订单列表
@@ -22,7 +27,7 @@ module.exports = {
 
     openDoor: ApiRootUrl + 'applets/openDoor', //开门取包
 
-    
+
 
 
 

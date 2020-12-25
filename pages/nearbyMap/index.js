@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    loading: true,
     orderList: [],
     current: '1',
     pageCount: 1,
@@ -138,7 +139,8 @@ Page({
   // 列表
   orderListFn: (current) => {
     that.setData({
-      isFlag: false
+      isFlag: false,
+      loading: false
     })
     let {
       latitude,
@@ -246,7 +248,7 @@ Page({
           'push.loading': '../../resource/img/finish.png',
         })
       }, 1500)
-    } else if(that.data.orderList.length){
+    } else if (that.data.orderList.length) {
       that.setData({
         // 'push.isLoading': false,
         'push.pullText': '- 我也是有底线的 -'

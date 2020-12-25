@@ -14,21 +14,21 @@ Page({
         'img': '../../resource/img/littlebag.png',
         'name': '小柜',
         'apply': '双肩包、挎包、手提袋等',
-        'specifications': '1'
+        'specifications': '0'
       },
       {
         'imgs': '../../resource/img/middlebag-s.png',
         'img': '../../resource/img/middlebag.png',
         'name': '中柜',
         'apply': '双肩包、挎包、购物袋等',
-        'specifications': '2'
+        'specifications': '1'
       },
       {
         'imgs': '../../resource/img/bigbag-s.png',
         'img': '../../resource/img/bigbag.png',
         'name': '大柜',
         'apply': '30寸以下行李箱、双肩包等',
-        'specifications': '3'
+        'specifications': '2'
       }
     ],
     user_status: '0'
@@ -60,7 +60,12 @@ Page({
     //   factoryNO: 'cw100086003',
     //   gzh_openid: 'oTczw5kSxCwWz4FW4FaT2OKIpz4M'
     // }
+    wx.removeStorageSync('qrcode');
     console.log('跳转拿到参数', options);
+    let qrcode = options.qrcode;
+    if (qrcode) {
+      wx.setStorageSync('qrcode', qrcode);
+    }
     let pathPartWrap = options;
     console.log(Object.values(pathPartWrap).length > 0);
     if (Object.values(pathPartWrap).length > 0) {
@@ -89,6 +94,10 @@ Page({
     // } else {
     //   that.usableFn();
     // }
+    // const eventChannel = this.getOpenerEventChannel();
+    // eventChannel.on('acceptData', function (data) {
+    //   console.log('上页面参数',data)
+    // })
   },
 
   orderInquire: () => {
@@ -102,18 +111,29 @@ Page({
       .then(res => {
         console.log("是否有订单", res);
         if (res.data.code == "0") {
+          let qrcode = wx.getStorageSync('qrcode');
           let customerId = res.data.data.customerId,
-            factoryNO = res.data.data.factoryNO,
-            orderinfo_id = res.data.data.orderinfo_id;
-          wx.redirectTo({
-            url: '/pages/fetchBag/index?customerId=' + customerId + '&factoryNO=' + factoryNO + '&orderinfo_id=' + orderinfo_id
-          })
-        } else {
-
+              factoryNO = res.data.data.factoryNO,
+              orderinfo_id = res.data.data.orderinfo_id;
+          if (qrcode) {
+            wx.redirectTo({
+              url: '/pages/fetchBag/index?customerId=' + customerId + '&factoryNO=' + factoryNO + '&orderinfo_id=' + orderinfo_id
+            })
+          } else {
+            console.log('外部')
+            wx.redirectTo({
+              url: '/pages/orderList/orderDetail/index?id=' + orderinfo_id,
+            })
+          }
         }
       })
       .catch(rej => {
-
+        console.log('错误')
+        wx.showToast({
+          title: rej.error,
+          icon: 'none',
+          duration: 2000
+        })
       })
   },
 
@@ -213,15 +233,55 @@ Page({
     pathPartWrap.specifications = specifications;
     if (unUsed) {
       wx.setStorageSync('pathPartWrap', pathPartWrap);
-      // if (that.data.user_status === '0') {
-      wx.navigateTo({
-        url: '../wxlogin/index',
-      })
-      // } else {
-      //   wx.navigateTo({
-      //     url: '../wxPay/index',
-      //   })
-      // }
+      if (that.data.user_status === '0') {
+        wx.navigateTo({
+          url: '../wxlogin/index',
+        })
+      } else {
+        let {
+          customerId,
+          factoryNO,
+          specifications,
+          gzh_openid
+        } = wx.getStorageSync('pathPartWrap');
+        const data = {
+          openid: wx.getStorageSync('open_id'),
+          FactoryNO: factoryNO,
+          customer_id: customerId,
+          specifications,
+          gzh_openid
+        }
+
+        mClient.wxRequest(api.creatOrder, data)
+          .then(res => {
+            console.log("老用户创建订单返回参数", res);
+            if (res.data.code == "0") {
+              let orderinfo_id = res.data.data.orderinfo_id;
+              let pathPartWrap = wx.getStorageSync('pathPartWrap');
+              pathPartWrap.orderinfo_id = orderinfo_id;
+              wx.setStorageSync('pathPartWrap', pathPartWrap);
+              // 跳转开门
+              wx.redirectTo({
+                url: '/pages/wxPay/index',
+              })
+            } else {
+              wx.showToast({
+                title: res.data.message,
+                icon: 'none',
+                duration: 1000
+              })
+              wx.hideLoading();
+            }
+          })
+          .catch(rej => {
+            console.log(rej)
+            wx.showToast({
+              title: rej.error,
+              icon: 'none',
+              duration: 2000
+            })
+          })
+      }
     } else {
       wx.showToast({
         title: '该规格暂无可用',

@@ -74,10 +74,15 @@ App({
         that.globalData.windowHeight = e.windowHeight;
         that.globalData.StatusBar = e.statusBarHeight;
         let capsule = wx.getMenuButtonBoundingClientRect();
-        if (capsule) {
+        let capsuleHeight = capsule.height;
+        if (capsuleHeight) {
           that.globalData.Custom = capsule;
           that.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
         } else {
+          let Custom = {
+            width: 87, height: 32
+          }
+          that.globalData.Custom = Custom;
           that.globalData.CustomBar = e.statusBarHeight + 50;
         }
       }
