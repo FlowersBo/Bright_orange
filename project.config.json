@@ -56,7 +56,7 @@
     "minified": true,
     "newFeature": true,
     "coverView": true,
-    "nodeModules": false,
+    "nodeModules": true,
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
@@ -65,8 +65,9 @@
     "checkSiteMap": false,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
+    "useMultiFrameRuntime": true,
     "useApiHook": true,
+    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -84,7 +85,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.10.4",
-  "appid": "wxf3f81a0729754e2f",
+  "appid": "wx06763f86125a1be2",
   "projectname": "Bright_orange",
   "debugOptions": {
     "hidedInDevtools": []
@@ -158,6 +159,12 @@
         {
           "name": "订单详情",
           "pathName": "pages/orderList/orderDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "地图导航",
+          "pathName": "pages/mapNavigation/index",
           "query": "",
           "scene": null
         }

@@ -30,13 +30,6 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    const query = wx.createSelectorQuery().in(this)
-    query.selectAll('.custom').boundingClientRect(function (res) {
-      const customHeight = res[0].height;
-      that.setData({
-        customHeight: customHeight
-      })
-    }).exec()
   },
   onShow: function () {
     that.setData({
@@ -157,6 +150,9 @@ Page({
         console.log("返回列表", res);
         if (res.data.code == "0") {
           let orderList = res.data.data.pointList;
+          for (const key in orderList) {
+            orderList[key].distance = orderList[key].distance.split(".")[0];
+          }
           orderList = that.data.orderList.concat(orderList);
           console.log('附近点位列表', orderList);
           if (orderList.length >= 10) {
@@ -197,6 +193,22 @@ Page({
           isFlag: true
         })
       })
+  },
+
+  //跳转
+  clickMapDetail: (e) => {
+    console.log(e);
+    let mapid = e.currentTarget.dataset.id;
+    if (mapid) {
+      // wx.navigateTo({
+      //   url: '/pages/mapNavigation/index',
+      //   success: function (res) {
+      //     res.eventChannel.emit('acceptData', {
+      //       data: mapid
+      //     })
+      //   }
+      // })
+    }
   },
 
   // 刷新
@@ -255,11 +267,19 @@ Page({
       })
     }
   },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    const query = wx.createSelectorQuery().in(this);
+    query.selectAll('.custom').boundingClientRect(function (res) {
+      console.log(res);
+      const customHeight = res[0].height;
+      that.setData({
+        customHeight: customHeight
+      })
+    }).exec()
   },
 
 

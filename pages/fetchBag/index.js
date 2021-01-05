@@ -16,13 +16,6 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    const query = wx.createSelectorQuery().in(this)
-    query.selectAll('.custom').boundingClientRect(function (res) {
-      const customHeight = res[0].height;
-      that.setData({
-        customHeight: customHeight
-      })
-    }).exec()
     wx.hideShareMenu();
     console.log('跳转拿到参数', options);
     let pathPartWrap = options;
@@ -56,10 +49,12 @@ Page({
 
   orderInquire: () => {
     let {
-      customerId
+      customerId,
+      factoryNO
     } = wx.getStorageSync('pathPartWrap');
     let data = {
-      customerId
+      customerId,
+      factoryNO
     };
     mClient.wxGetRequest(api.checkOrder, data)
       .then(res => {
@@ -272,7 +267,13 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    const query = wx.createSelectorQuery().in(this)
+    query.selectAll('.custom').boundingClientRect(function (res) {
+      const customHeight = res[0].height;
+      that.setData({
+        customHeight: customHeight
+      })
+    }).exec()
   },
 
   /**

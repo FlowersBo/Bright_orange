@@ -1,13 +1,18 @@
 <!--pages/nearbyMap/index.wxml-->
 <import src="index.skeleton.wxml"/>
 <template is="skeleton" wx-if="{{loading}}"/>
-<cu-custom bgColor="bg-user-color" isBack="true" class="custom">
+<cu-custom bgColor="bg-user-color"  isCustom="true" class="custom">
   <view slot="backText">返回</view>
   <view slot="content">附近存包柜</view>
 </cu-custom>
 <scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
   style="position: absolute;top: {{2*customHeight}}rpx;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
   bindtoload="toload">
+  <navigator url="../mapNavigation/index" class="gotomap">
+    <icon class="iconfont iconditu"></icon>
+    地图模式
+    <icon class="iconfont iconperson-right"></icon>
+  </navigator>
   <view class="nearbyListWrap">
     <block wx:for="{{orderList}}" wx:key="index">
       <view class="nearbyList" data-id="{{item.id}}" bindtap="clickMapDetail">

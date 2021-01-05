@@ -17,6 +17,29 @@ Page({
   onLoad: function (options) {
     that = this;
     wx.hideShareMenu();
+    wx.removeStorageSync('qrcode');
+    console.log('跳转拿到参数', options);
+    let qrcode = options.qrcode;
+    if (qrcode) {
+      wx.setStorageSync('qrcode', qrcode);
+    }
+    let timestamp = options.timestamp;
+    console.log('时间戳', timestamp);
+    console.log('缓存时间戳列表', wx.getStorageSync('timestampList'));
+    if (timestamp) {
+      let timestampList = wx.getStorageSync('timestampList');
+      let index = timestampList.indexOf(timestamp);
+      console.log('缓存中是否有', index);
+      if (index === -1) {
+        timestampList.push(timestamp);
+        wx.setStorageSync('timestampList', timestampList);
+      } else {
+        wx.redirectTo({
+          url: '/pages/destination/index'
+        })
+      }
+    }
+    that.orderInquire();
     // let open_id = wx.getStorageSync('open_id');
     // if (!open_id) {
     that.wxLogin();
@@ -26,22 +49,50 @@ Page({
     console.log('缓存', wx.getStorageSync('pathPartWrap'));
     console.log(Object.values(pathPartWrap).length > 0);
     if (Object.values(pathPartWrap).length > 0) {
-      // let path = decodeURIComponent(pagepath);
-      // let pathPartWrap = {};
-      // const pathPart = path.split('?')[1].split('&');
-      // console.log('分解', pathPart);
-      // for (const key in pathPart) {
-      //   let pathPart_item = pathPart[key].split('=');
-      //   console.log(pathPart_item);
-      //   for (const item in pathPart_item) {
-      //     pathPart_item[item] = pathPart_item[item].replace(/\"/g, "");
-      //     pathPartWrap[pathPart_item[0]] = pathPart_item[1];
-      //   }
-      // }
       console.log(pathPartWrap);
       wx.setStorageSync('pathPartWrap', pathPartWrap);
     }
   },
+
+  orderInquire: () => {
+    let {
+      customerId,
+      factoryNO
+    } = wx.getStorageSync('pathPartWrap');
+    let data = {
+      customerId,
+      factoryNO
+    };
+    mClient.wxGetRequest(api.checkOrder, data)
+      .then(res => {
+        console.log("是否有订单", res);
+        if (res.data.code == "0") {
+          let qrcode = wx.getStorageSync('qrcode');
+          let customerId = res.data.data.customerId,
+            factoryNO = res.data.data.factoryNO,
+            orderinfo_id = res.data.data.orderinfo_id;
+          if (qrcode) {
+            wx.redirectTo({
+              url: '/pages/fetchBag/index?customerId=' + customerId + '&factoryNO=' + factoryNO + '&orderinfo_id=' + orderinfo_id
+            })
+          } else {
+            console.log('外部')
+            wx.redirectTo({
+              url: '/pages/orderList/orderDetail/index?id=' + orderinfo_id,
+            })
+          }
+        }
+      })
+      .catch(rej => {
+        console.log('错误')
+        wx.showToast({
+          title: rej.error,
+          icon: 'none',
+          duration: 2000
+        })
+      })
+  },
+
   // 登录
   wxLogin: () => {
     mClient.login()
@@ -144,7 +195,7 @@ Page({
                     wx.showToast({
                       title: res.data.message,
                       icon: 'none',
-                      duration: 1000
+                      duration: 2000
                     })
                     wx.hideLoading();
                   }

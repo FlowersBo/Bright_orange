@@ -28,13 +28,6 @@ Page({
     if (id) {
       that.orderDetailFn(id);
     }
-    const query = wx.createSelectorQuery().in(this)
-    query.selectAll('.custom').boundingClientRect(function (res) {
-      const customHeight = res[0].height;
-      that.setData({
-        customHeight: customHeight
-      })
-    }).exec()
     wx.hideShareMenu();
   },
 
@@ -106,7 +99,13 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    const query = wx.createSelectorQuery().in(this)
+    query.selectAll('.custom').boundingClientRect(function (res) {
+      const customHeight = res[0].height;
+      that.setData({
+        customHeight: customHeight
+      })
+    }).exec()
   },
 
   /**

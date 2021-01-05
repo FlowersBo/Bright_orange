@@ -14,7 +14,7 @@
             <view class="order_status">
               <view class="order_status_img">
                 <image
-                  src="{{openid == '0'?'../../resource/img/little-bag.png':(openid == '1'?'../../resource/img/middle-bag.png':'../../resource/img/big-bag.png')}}">
+                  src="{{item.specifications=== '0'?'../../resource/img/little-bag.png':(item.specifications === '1'?'../../resource/img/middle-bag.png':'../../resource/img/big-bag.png')}}">
                 </image>
               </view>
               <view class="order_status_text">{{item.orderStatus}}</view>
@@ -36,7 +36,7 @@
             </view>
             <view class="order_detail">
               <view class="detail_name">起始时间：</view>
-              <view class="detail_content">{{item.startDate}}</view>
+              <view class="detail_content">{{item.startDate?item.startDate:''}}</view>
             </view>
             <block>
               <view class="order_detail">

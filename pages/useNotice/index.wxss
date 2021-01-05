@@ -1,1 +1,12 @@
 /* pages/useNotice/index.wxss */
+page{
+  background-color: #fff;
+}
+.useNoticeWrap{
+  width: 100%;
+  padding: 30rpx;
+  font-size: 32rpx;
+}
+.useNotice view{
+  margin-bottom: 6rpx;
+}

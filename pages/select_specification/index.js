@@ -38,13 +38,6 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    const query = wx.createSelectorQuery().in(this)
-    query.selectAll('.custom').boundingClientRect(function (res) {
-      const customHeight = res[0].height;
-      that.setData({
-        customHeight: customHeight
-      })
-    }).exec()
     wx.hideShareMenu();
     // let result = options.q;
     // if (result) {
@@ -66,6 +59,43 @@ Page({
     if (qrcode) {
       wx.setStorageSync('qrcode', qrcode);
     }
+    let timestamp = options.timestamp;
+    console.log('时间戳', timestamp);
+    console.log('缓存时间戳列表', wx.getStorageSync('timestampList'));
+    if (timestamp) {
+      let timestampList = wx.getStorageSync('timestampList');
+      let index = timestampList.indexOf(timestamp);
+      console.log('缓存中是否有',index);
+      if (index === -1) {
+        timestampList.push(timestamp);
+        wx.setStorageSync('timestampList', timestampList);
+      } else {
+        wx.redirectTo({
+          url: '/pages/destination/index'
+        })
+      }
+      // if (timestampList.length > 0) {
+      //   for (const key in timestampList) {
+      //     console.log(timestampList.hasOwnProperty(key))
+      //     if (timestampList.hasOwnProperty(key)) {
+      //       const element = timestampList[key];
+      //       console.log(element)
+      //       if (element == timestamp) {
+      //         wx.redirectTo({
+      //           url: '/pages/destination/index'
+      //         })
+      //       } else {
+      //         timestampList.push(timestamp);
+      //         wx.setStorageSync('timestampList', timestampList);
+      //       }
+      //     }
+      //   }
+      // } else {
+      //   timestampList.push(timestamp);
+      //   wx.setStorageSync('timestampList', timestampList);
+      // }
+    }
+    
     let pathPartWrap = options;
     console.log(Object.values(pathPartWrap).length > 0);
     if (Object.values(pathPartWrap).length > 0) {
@@ -102,10 +132,12 @@ Page({
 
   orderInquire: () => {
     let {
-      customerId
+      customerId,
+      factoryNO
     } = wx.getStorageSync('pathPartWrap');
     let data = {
-      customerId
+      customerId,
+      factoryNO
     };
     mClient.wxGetRequest(api.checkOrder, data)
       .then(res => {
@@ -113,8 +145,8 @@ Page({
         if (res.data.code == "0") {
           let qrcode = wx.getStorageSync('qrcode');
           let customerId = res.data.data.customerId,
-              factoryNO = res.data.data.factoryNO,
-              orderinfo_id = res.data.data.orderinfo_id;
+            factoryNO = res.data.data.factoryNO,
+            orderinfo_id = res.data.data.orderinfo_id;
           if (qrcode) {
             wx.redirectTo({
               url: '/pages/fetchBag/index?customerId=' + customerId + '&factoryNO=' + factoryNO + '&orderinfo_id=' + orderinfo_id
@@ -314,7 +346,13 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    const query = wx.createSelectorQuery().in(this)
+    query.selectAll('.custom').boundingClientRect(function (res) {
+      const customHeight = res[0].height;
+      that.setData({
+        customHeight: customHeight
+      })
+    }).exec()
   },
 
   /**

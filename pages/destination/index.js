@@ -33,7 +33,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+   
   },
 
   //扫码
@@ -92,7 +92,7 @@ Page({
                                 let [customerId, factoryNO, specifications] = param;
                                 console.log('截取后', customerId, factoryNO, specifications);
                                 wx.navigateTo({
-                                  url: '/pages/wxlogin/index?customerId=' + customerId + '&factoryNO=' + factoryNO + '&specifications=' + specifications,
+                                  url: '/pages/wxlogin/index?customerId=' + customerId + '&factoryNO=' + factoryNO + '&specifications=' + specifications + '&qrcode=' + 'qr',
                                 })
                               }
                             } else {

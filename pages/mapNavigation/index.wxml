@@ -1,11 +1,11 @@
 <!--pages/cx/index.wxml-->
 <!-- <text>{{markers[id].placeName}}</text> -->
 <block wx:if='{{isshow}}'>
-  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="15" include-points="{{markers}}"
-    markers="{{markers}}" bindmarkertap="showModal" data-id="{{markers}}" polyline="{{polyline}}"
-    bindregionchange="regionchange" show-location style="width: 100%; height: 100%;">
-    <cover-view class='index_bt1'>
-      <cover-image class='xiaoer' src="../../resource/img/user_img.png" />
+  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" include-points="{{mapList}}"
+    markers="{{mapList}}" enable-building="true" bindmarkertap="showModal"
+    bindregionchange="regionchange" style="width: 100%; height: 100%;">
+    <cover-view class='index_bt1' bindtap="gotohome">
+      <cover-image class='xiaoer' src="../../resource/img/logo.jpg" />
     </cover-view>
     <!-- 跳转点位列表 -->
     <cover-view class='index_shuaxin' bindtap="nearbyFn">
@@ -17,13 +17,13 @@
     <cover-view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
       <cover-view class='placeBox'>
         <cover-view class='placeViewLt'>
-          <cover-view class='viewTitle'>朝阳区日坛公园</cover-view>
-          <cover-view class='viewDis'>(1000m)</cover-view>
-          <cover-view class='viewAddr'>朝阳区日坛北路</cover-view>
+          <cover-view class='viewTitle'>{{mapList_item.pointname}}</cover-view>
+          <cover-view class='viewDis'>({{mapList_item.distance}}m)</cover-view>
+          <cover-view class='viewAddr'>{{mapList_item.address}}</cover-view>
         </cover-view>
         <cover-view class='placeViewRt'>
           <!-- bindtap="opendetail" data-id="{{myall.id}}" -->
-          <cover-image src='../../resource/img/user_img.png'></cover-image>
+          <cover-image class="placeViewRt_img" src="{{item.pointImgUrl?item.pointImgUrl:'../../resource/img/cabine.png'}}"></cover-image>
         </cover-view>
       </cover-view>
       <cover-view class='viewIcon'>

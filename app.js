@@ -11,7 +11,7 @@ App({
     if (options.scene === 1038 || options.referrerInfo.appId == 'wxd8f3793ea3b935b8') { // 场景值1038：从被打开的小程序返回,但安卓手机返回的是10001，所以只能根据appid去识别支付分的。
       console.log("支付分返回商家小程序")
       that.globalData.userTouch = '1';
-    }else{
+    } else {
       console.log("没有跳转")
       that.globalData.userTouch = '0';
     }
@@ -66,6 +66,10 @@ App({
 
   onLaunch: function () {
     const that = this;
+    if (!wx.getStorageSync('timestampList')) {//小程序卡片做缓存
+      let timestampList = [];
+      wx.setStorageSync('timestampList', timestampList);
+    }
     wx.getSystemInfo({
       success: e => {
         that.globalData.screenWidth = e.screenWidth;
@@ -80,10 +84,11 @@ App({
           that.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
         } else {
           let Custom = {
-            width: 87, height: 32
+            width: 87,
+            height: 32
           }
           that.globalData.Custom = Custom;
-          that.globalData.CustomBar = e.statusBarHeight + 50;
+          that.globalData.CustomBar = e.statusBarHeight + 46;
         }
       }
     })

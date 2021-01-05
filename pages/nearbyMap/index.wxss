@@ -3,7 +3,10 @@
 page {
   height: 100%;
 }
-
+.gotomap{
+  float: right;
+  margin-right: 20rpx;
+}
 .nearbyListWrap {
   width: 100%;
   display: flex;

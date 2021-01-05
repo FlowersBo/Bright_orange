@@ -39,13 +39,6 @@ Page({
     // } else {
     that.wxLogin();
     // }
-    const query = wx.createSelectorQuery().in(this)
-    query.selectAll('.custom').boundingClientRect(function (res) {
-      const customHeight = res[0].height;
-      that.setData({
-        customHeight: customHeight
-      })
-    }).exec()
   },
 
   // 登录
@@ -105,7 +98,9 @@ Page({
               element.orderDate = util.intervalTime(element.startDate, element.finishDate);
               element.finishDate = util.timestampToTimeLong(element.finishDate);
             }
-            element.startDate = util.timestampToTimeLong(element.startDate);
+            if (element.startDate) {
+              element.startDate = util.timestampToTimeLong(element.startDate);
+            }
             if (element.orderStatus == '1') {
               element.orderStatus = '使用中'
             } else if (element.orderStatus == '2') {
@@ -113,7 +108,6 @@ Page({
             } else {
               element.orderStatus = '已取消'
             }
-
           });
           orderList = that.data.orderList.concat(orderList);
           if (orderList.length >= 10) {
@@ -218,7 +212,13 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    const query = wx.createSelectorQuery().in(this)
+    query.selectAll('.custom').boundingClientRect(function (res) {
+      const customHeight = res[0].height;
+      that.setData({
+        customHeight: customHeight
+      })
+    }).exec()
   },
 
   /**

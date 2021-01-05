@@ -2,3 +2,8 @@
 <cu-custom bgColor="bg-user-color" isCustomHome="true">
   <view slot="content">关于我们</view>
 </cu-custom>
+<view class="aboutUsWrap">
+  <view class="aboutUs">
+    <text>{{content}}</text>
+  </view>
+</view>

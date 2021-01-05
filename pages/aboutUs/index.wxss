@@ -1,1 +1,15 @@
 /* pages/aboutUs/index.wxss */
+page{
+  background-color: #fff;
+}
+.aboutUsWrap{
+  width: 100%;
+  padding: 0 30rpx;
+  margin-top: 30rpx;
+
+}
+.aboutUs{
+  font-size: 32rpx;
+  line-height: 46rpx;
+  /* text-indent: 30rpx; */
+}

@@ -67,20 +67,21 @@ Page({
           // }
         }
       })
-      wx.requestSubscribeMessage({
-        tmplIds: [
-          'GMks3J43_oZ8TpdZMrQoOF8eUsiZtxSomCJZf1s7JEc',
-          'Kj6wlvvil7tUub1fxknEfIr-hi23QqBnj5lVdvn5FKo'
-        ],
-        success(res) {
-          console.log('成功', res);
-          that.wxPayFn();
-        },
-        fail(res) { // 接口调用失败的回调函数
-          console.log('失败', res);
-          that.wxPayFn();
-        }
-      })
+      that.wxPayFn();
+      // wx.requestSubscribeMessage({
+      //   tmplIds: [
+      //     'GMks3J43_oZ8TpdZMrQoOF8eUsiZtxSomCJZf1s7JEc',
+      //     'Kj6wlvvil7tUub1fxknEfIr-hi23QqBnj5lVdvn5FKo'
+      //   ],
+      //   success(res) {
+      //     console.log('成功', res);
+      //     that.wxPayFn();
+      //   },
+      //   fail(res) { // 接口调用失败的回调函数
+      //     console.log('失败', res);
+      //     that.wxPayFn();
+      //   }
+      // })
     } else {
       wx.showToast({
         title: '请先同意勾选委托扣款授权书',
