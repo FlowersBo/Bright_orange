@@ -29,10 +29,13 @@
       <view class="liability">勾选即同意</view>
       <view class="liability" bindtap="liabilityFun"> <text class="accredit">《委托扣款授权书》</text> </view>
     </view>
-    <button class="bottom" disabled="{{disabled}}" bindtap="authorizationFn">
-      <view>先存后付</view>
-      <view class="chance">(微信支付分550分及以上有机会)</view>
-    </button>
+    <view class="btnWrap">
+      <button style="{{disabled?'background:#ddd':''}}" class="bottom" disabled="{{disabled}}" bindtap="authorizationFn">先存后付</button>
+      <view class="zffWrap">
+        <image mode="aspectFit" src="../../resource/img/zff.png"></image>
+        <view class="chance">微信支付分 | 550分及以上信用优享</view>
+      </view>
+    </view>
   </view>
 </view>
 

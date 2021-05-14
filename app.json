@@ -1,18 +1,18 @@
 {
   "pages": [
     "pages/destination/index",
-    "pages/mapNavigation/index",
     "pages/select_specification/index",
+    "pages/nearbyMap/index",
+    "pages/fetchBag/index",
+    "pages/index/index",
+    "pages/bagClaim/index",
+    "pages/wxPay/index",
+    "pages/mapNavigation/index",
     "pages/orderList/orderDetail/index",
     "pages/useNotice/index",
     "pages/aboutUs/index",
-    "pages/nearbyMap/index",
-    "pages/wxPay/index",
     "pages/wxlogin/index",
-    "pages/bagClaim/index",
     "pages/orderList/index",
-    "pages/index/index",
-    "pages/fetchBag/index",
     "pages/cs/index"
     ],
   "window": {

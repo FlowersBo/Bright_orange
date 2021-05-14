@@ -11,6 +11,7 @@ Page({
    */
   data: {
     checked: true,
+    disabled: true,
     extraData: '',
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
@@ -187,9 +188,13 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    that.setData({
-      disabled: true
-    })
+    // wx.loadFontFace({
+    //   family: 'PingFangSC-Medium',
+    //   source: 'url("https://www.your-server.com/PingFangSC-Medium.ttf")',
+    //   success: function () {
+    //     console.log('load font success')
+    //   }
+    // })
     wx.hideShareMenu();
   },
 

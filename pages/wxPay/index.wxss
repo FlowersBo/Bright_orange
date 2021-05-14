@@ -1,7 +1,11 @@
 /* pages/wxPay/index.wxss */
+page {
+  background: #f8f8f8;
+}
 
 .wxPayWrap {
   width: 100%;
+  /* font-family: "Bitstream Vera Serif Bold"; */
 }
 
 .wxPay {
@@ -61,30 +65,47 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.time_number{
+
+.time_number {
   font-size: 42rpx;
   margin-right: 6rpx;
 }
+
+.btnWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .bottom {
-  width: 416rpx;
-  height: 140rpx;
-  line-height: 1.8;
-  border-radius: 14rpx;
-  margin-top: 30rpx;
-  font-size: 38rpx;
+  width: 560rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-radius: 50rpx;
+  margin: 20rpx;
+  font-size: 36rpx;
   font-weight: bold;
   /* background-image: linear-gradient(-90deg, red, yellow); */
   /* background-color: #FDE50D; */
   background-color: #004EFF;
   letter-spacing: 4rpx;
   color: #fff;
+}
+
+.zffWrap {
   display: flex;
-  flex-direction: column;
-  padding: 10rpx 0;
+  align-items: center;
+}
+
+.zffWrap image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 6rpx;
 }
 
 .chance {
-  font-size: 20rpx;
+  font-size: 28rpx;
+  color: #666666;
 }
 
 button::after {
@@ -105,6 +126,7 @@ button::after {
   color: #04BE02;
   font-weight: bold;
 }
+
 /* .accredit{
   color: #04BE02;
 } */

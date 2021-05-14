@@ -1,7 +1,6 @@
 const ApiRootUrl = 'https://api.morninggo.cn/';
-// const ApiRootUrl = 'https://w3.morninggo.cn/'; //晨购
+// const ApiRootUrl = 'https://w3.morninggo.cn/'; //测试
 // const ApiRootUrl = 'http://192.168.126.247:8080/morninggo_app_http_war/';
-// const ApiRootUrl = 'http://192.168.31.148:8080/morninggo_app_http_war_exploded/';
 module.exports = {
     shortUrlDistinguish: ApiRootUrl + 'applets/shortUrlDistinguish', //扫码传参
 
