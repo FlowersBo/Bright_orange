@@ -229,7 +229,7 @@ Page({
           console.log('授权状态', user_service_state);
           if (user_service_state) {
             that.setData({
-              disabled: false
+              disabled: false 
             })
           }
           if (userTouch === '1' && !user_service_state && that.data.errMsg) {
