@@ -8,9 +8,9 @@
       <cover-image class='xiaoer' src="../../resource/img/logo.jpg" />
     </cover-view>
     <!-- 跳转点位列表 -->
-    <cover-view class='index_shuaxin' bindtap="nearbyFn">
+    <!-- <cover-view class='index_shuaxin' bindtap="nearbyFn">
       <cover-image class='shuaxin' src="../../resource/img/nearby.png" />
-    </cover-view>
+    </cover-view> -->
     <!--背景层  -->
     <cover-view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></cover-view>
     <!--弹出框  -->
